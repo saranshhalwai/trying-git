@@ -9,14 +9,14 @@ class Person:
         if self.__is_employee:
             return self.name + " is Employee."
         elif self.is_businessman:
-            return self.name, " is businessman"
+            return self.name + " is Businessman"
         else:
             return self.name + ' is not yet working'
 
     def __repr__(self):
         print('name:', self.name)
         print('Employee status:', self.__is_employee)
-        print('businessman status:', self.is_businessman)
+        print('Businessman status:', self.is_businessman)
 
     def __check_bug(self):
         if self.__is_employee and self.is_businessman:
@@ -40,12 +40,30 @@ class Employee(Person):
         person._Person__is_employee = False
 
 
+class Businessman(Person):
+    def __init__(self, name):
+        super().__init__(name)
+        self.is_businessman = True
+
+    @classmethod
+    def idea(cls, person=Person(name="")):
+        person.is_businessman = True
+
+    @classmethod
+    def bankrupt(cls, person=Person(name="")):
+        person.is_businessman = False
+
+
 def main():
     me = Person("Saransh")
     print(me)
     Employee.employ(me)
     print(me)
     Employee.fire(me)
+    print(me)
+    Businessman.idea(me)
+    print(me)
+    Businessman.bankrupt(me)
     print(me)
 
 
